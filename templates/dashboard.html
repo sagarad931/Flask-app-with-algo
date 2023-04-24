@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- <link rel="stylesheet" href="assets/css/styles.css"> -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+
+        <!-- =====BOX ICONS===== -->
+        <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+
+        <title>News Classification</title>
+    
+    </head>
+    <body>
+        <!--===== HEADER =====-->
+        <header class="l-header">
+            <nav class="nav bd-grid">
+                <div>
+                    <a href="" class="nav__logo"> Nepali News Classification</a>
+                </div>
+
+                <div class="nav__menu" id="nav-menu">
+                    <ul class="nav__list">
+                        <li class="nav__item"><a href="#home" class="nav__link active">Home</a></li>
+                        <li class="nav__item"><a href="#about" class="nav__link">About</a></li>
+                        <li class="nav__item"><a href="#catogery" class="nav__link">Catogery</a></li>
+                        <!-- <li class="nav__item"><a href="#contact" class="nav__link">Contact</a></li> -->
+                        <!-- <li class="nav__item"><a href="{{ url_for('login') }}" class="nav__link">Login</a></li> -->
+
+                        <li class="nav__item" style="color: hsl(224, 89%, 60%)
+                        ;">Welcome, {{username}}</li>
+
+                        <li class="nav__item"><a href="{{ url_for('logout') }}" class="nav__link">Logout</a></li>
+                        
+
+                    </ul>
+                </div>
+
+                <div class="nav__toggle" id="nav-toggle">
+                    <i class='bx bx-menu'></i>
+                </div>
+            </nav>
+        </header>
+
+        <main class="l-main">
+            <!--===== HOME =====-->
+            <section class="home bd-grid" id="home">
+                <div class="home__data">
+                    <h1 class="home__title">Hi, {{ username }}<br><span class="home__title-color">Classify Your News</span><br>Here</h1>
+
+                    <a href="#predict_section" class="button">Click me</a>
+                </div>
+
+                <!-- <div class="home__social">
+                    <a href="" class="home__social-icon"><i class='bx bxl-linkedin'></i></a>
+                    <a href="" class="home__social-icon"><i class='bx bxl-behance' ></i></a>
+                    <a href="" class="home__social-icon"><i class='bx bxl-github' ></i></a>
+                </div> -->
+
+                <div class="home__img">
+                    
+                    <img src="/static/img/pic_ (5).jpg" alt="">
+                </div>
+            </section>
+
+            <!--===== ABOUT =====-->
+            <section class="about section " id="about">
+                <h2 class="section-title">About Us</h2>
+
+                <div class="about__container bd-grid">
+                    <div class="about__img">
+                        <img src="/static/img/pic_ (10).jpg" alt="">
+                    </div>
+                    
+                    <div>
+                        <h2 class="about__subtitle">Nepali News Classification </h2>
+                        <p class="about__text">This is a Platform where you can easily classify your Nepali news. Here you can find your news in different catogery
+                            like Technology, Politics, Business, Health, Politics and many more. As we process only the Nepali News for this time 
+                            but we are planning to use it for different language news. </p>           
+                    </div>                                   
+                </div>
+            </section>
+
+           
+            <!--===== WORK =====-->
+            <section class="catogery section" id="catogery">
+                <h2 class="section-title">Catogery</h2>
+
+                <div class="work__container bd-grid">
+
+                    <a href="#" class="work__img">
+                        <img src="/static/img/pic_ (20).jpg" alt="">
+                        <div class="catogery_img_text">
+                            <div class="text">Health</div>
+                        </div>
+                    </a>
+                    
+                    <a href="#" class="work__img">
+                        <img src="/static/img/pic_ (17).jpg" alt="">
+                        <div class="catogery_img_text">
+                            <div class="text">Politics</div>
+                        </div>
+                    </a>
+                    <a href="#" class="work__img">
+                        <img src="/static/img/pic_ (18).jpg" alt="">
+                        <div class="catogery_img_text">
+                            <div class="text">Business</div>
+                        </div>
+                    </a>
+                    <a href="#" class="work__img">
+                        <img src="/static/img/pic_ (19).jpg" alt="">
+                        <div class="catogery_img_text">
+                            <div class="text">Sports</div>
+                        </div>
+                    </a>
+                    <a href="#" class="work__img">
+                        <img src="/static/img/pic_ (21).jpg" alt="">
+                        <div class="catogery_img_text">
+                            <div class="text">Technology</div>
+                        </div>
+                    </a>
+                    <a href="#" class="work__img">
+                        <img src="/static/img/pic_ (16).jpg" alt="">
+                        <div class="catogery_img_text">
+                            <div class="text">Entertainment</div>
+                        </div>
+                    </a>
+                    
+                </div>
+            </section>
+
+            <section class="Predict section" id="predict_section">
+                <h2 class="section-title">Predict</h2>
+
+                <div class="contact__container bd-grid">
+                    <form method="POST" action="/predict" class="contact__form" accept-charset="UTF-8" id="myForm">
+                        <label for="label" class="contact__lable" style="font-weight:600; font-size: large;">Enter your news:</label>
+                        <br>
+                        <br> 
+                        <!-- <input type="text" class="contact__input" id="data" name="data"> -->
+                        <textarea name="data" placeholder="Here..." id="data" rows="15" cols="1" class="contact__input"></textarea> 
+                        <input type="button" class="contact__button button" onclick="submitForm();" value="Predict">
+                        <br>
+
+                        <p id="error_msg"></p>
+                                                
+                        <p style="color: hsl(224, 89%, 60%);font-size:larger; font-weight: 750;">{{ prediction }}</p>
+                        <span style="color: hsl(224, 89%, 60%);font-size:larger; font-weight: 750;" id="prediction"></span>
+                        
+                    
+                    </form>
+                </div>
+            </section>
+        </main>
+        </form>
+
+        <!--===== FOOTER =====-->
+        <footer class="footer">
+            <div class="footer__social">
+                <a href="#" class="footer__icon"><i class='bx bxl-facebook' ></i></a>
+                <a href="#" class="footer__icon"><i class='bx bxl-instagram' ></i></a>
+                <a href="#" class="footer__icon"><i class='bx bxl-twitter' ></i></a>
+            </div>
+            <p class="footer__copy">&#169; Copyright 2023. All rigths reserved</p>
+        </footer>
+         
+       <script>
+            function submitForm() {
+                // alert("Called");
+                
+                var x = document.forms["myForm"]["data"].value;
+                if (x == "") {
+
+                    document.getElementById("prediction").innerHTML = "Please fill out the required field";
+                    
+                    return false;
+
+                    // alert("Please fill out the required field");
+                    // return false;
+                }
+                 
+                else if (/^[A-Za-z0-9]+$/.test(x)) {
+                var errorMsg = document.getElementById("prediction");
+                errorMsg.innerHTML = "Please enter a nepali word";
+                return false;
+                 }
+                 else if (/[!#$%^&*(){\}+\-/]/.test(x)) {
+                var errorMsg = document.getElementById("prediction");
+                errorMsg.innerHTML = "Please remove special characters";
+                return false;
+                }
+                else{
+
+                    var form = document.getElementById("myForm");
+                    var formData = new FormData(form);
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("POST", "/predict");
+                    xhr.onreadystatechange = function() {
+                        if (xhr.readyState === 4 && xhr.status === 200) {
+                        var prediction = xhr.responseText;
+                        console.log(typeof(prediction));
+                        prediction=JSON.parse(prediction);
+                        console.log(prediction['data']);
+                        document.getElementById("prediction").innerHTML = prediction['data'];
+
+                    }
+                };
+                xhr.send(formData);
+                return false;
+                } 
+            }
+       </script>
+       <script>
+       </script>
+               <!--===== SCROLL REVEAL =====-->
+               <script src="https://unpkg.com/scrollreveal"></script>
+
+               <!--===== MAIN JS =====-->
+               <!-- <script src="assets/js/main.js"></script> -->
+               <script src="{{ url_for('static', filename='js/main.js') }}"/>   
+    </body>
+</html>
